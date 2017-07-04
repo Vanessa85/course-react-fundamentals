@@ -1,8 +1,7 @@
 import axios from 'axios';
+import config from '../../config.js';
 
-const ID = 'XXXX';
-const SECRET = 'XXXXX';
-var params = `?client_id=${ID}&client_secret=${SECRET}`;
+var params = `?client_id=${config.GITHUB_ID}&client_secret=${config.GITHUB_SECRET}`;
 
 function getProfile(username) {
   return axios.get(`https://api.github.com/users/${username}${params}`)
