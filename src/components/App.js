@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Popular from './Popular';
+import PopularContainer from './popular/PopularContainer';
 import Home from './Home';
 import Battle from './Battle';
 import Results from './Results';
@@ -17,7 +17,7 @@ class App extends React.Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/battle" component={Battle} />
             <Route path="/battle/results" component={Results} />
-            <Route path="/popular" component={Popular} />
+            <Route path="/popular" component={PopularContainer} />
             <Route render={() => {
               return <p>Not found</p>
             }} />
