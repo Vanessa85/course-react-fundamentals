@@ -12,3 +12,8 @@ export const resetPlayerBattle = (id) => ({
   type: 'RESET_PLAYER_BATTLE',
   payload: id
 });
+
+export const battle = (players) => ({
+  type: 'FETCH_RESULT_BATTLE',
+  payload: players
+});

@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { Link } from 'react-router-dom';
-import api from '../utils/api';
-import PlayerPreview from './PlayerPreview';
-import Loading from './Loading';
+import PlayerPreview from '../PlayerPreview';
+import Loading from '../Loading';
 
 const Profile = ({ info }) => (
   <PlayerPreview avatar={info.avatar_url} username={info.login}>
@@ -39,42 +38,14 @@ Player.propTypes = {
 };
 
 class Results extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      winner: null,
-      loser: null,
-      error: null,
-      loading: true
-    };
-  }
-
   componentDidMount() {
     var players = queryString.parse(this.props.location.search);
-    api.battle([
-      players.playerOneName,
-      players.playerTwoName
-    ]).then(results => {
-      if (results === null) {
-        return this.setState({
-          error: 'Looks like there was error. Check that both users exist on Github',
-          loading: false,
-        });
-      }
-
-      this.setState({
-        error: null,
-        winner: results[0],
-        loser: results[1],
-        loading: false
-      });
-
-      console.table(results);
-    });
+    this.props.battle([players.playerOneName, players.playerTwoName]);
   }
 
   render() {
-    const { error, winner, loser, loading } = this.state;
+    console.log('this.props==', this.props)
+    const { error, winner, loser, loading } = this.props;
 
     if (loading === true) {
       return <Loading />

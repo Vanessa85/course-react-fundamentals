@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PopularContainer from './popular/PopularContainer';
 import Home from './Home';
 import BattleContainer from './battle/BattleContainer';
-import Results from './Results';
+import ResultsContainer from './results/ResultsContainer';
 import Nav from './Nav';
 
-class App extends React.Component {
+class App extends Component {
 
   render() {
     return (
@@ -16,7 +16,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/battle" component={BattleContainer} />
-            <Route path="/battle/results" component={Results} />
+            <Route path="/battle/results" component={ResultsContainer} />
             <Route path="/popular" component={PopularContainer} />
             <Route render={() => {
               return <p>Not found</p>

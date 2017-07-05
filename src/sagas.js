@@ -10,12 +10,19 @@ function* fetchPopularReposSaga(action) {
   }
 }
 
-// To launch the above task on each FETCH_REQUESTED action:
-// function* watchFetchPopularRepos() {
-//   // yield takeEvery('FETCH_POPULAR_REPOS', fetchPopularReposSaga);
-//   yield takeLatest('FETCH_POPULAR_REPOS', fetchPopularReposSaga);
-// }
+function* fetchResultBattleSaga(action) {
+  try {
+    const results = yield call(api.battle, action.payload);
+    if (results === null) {
+      throw new Error('Looks like there was error. Check that both users exist on Github');
+    }
+    yield put({ type: 'FETCH_RESULT_BATTLE_SUCCESS', payload: results });
+  } catch (error) {
+    yield put({ type: 'FETCH_RESULT_BATTLE_FAILED', payload: error });
+  }
+}
 
 export default function* rootSaga() {
   yield takeLatest('FETCH_POPULAR_REPOS', fetchPopularReposSaga);
+  yield takeLatest('FETCH_RESULT_BATTLE', fetchResultBattleSaga);
 }
