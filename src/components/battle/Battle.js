@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import PlayerPreview from './PlayerPreview';
+import PlayerPreview from '../PlayerPreview';
 
 class PlayerInput extends Component {
   constructor(props) {
@@ -57,41 +57,24 @@ PlayerInput.propTypes = {
 class Battle extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      playerOneName: '',
-      playerTwoName: '',
-      playerOneImage: null,
-      playerTwoImage: null
-    };
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleReset = this.handleReset.bind(this);
   }
 
   handleSubmit(id, username) {
-    this.setState(function() {
-      var newState = {};
-      newState[id + 'Name'] = username;
-      newState[id + 'Image'] = `https://github.com/${username}.png?size=200`;
-      return newState;
-    });
+    this.props.selectPlayerBattle(id, username);
   }
 
   handleReset(id) {
-    this.setState(function() {
-      var newState = {};
-      newState[id + 'Name'] = '';
-      newState[id + 'Image'] = null;
-      return newState;
-    });
+    this.props.resetPlayerBattle(id);
   }
 
   render() {
     var match = this.props.match;
-    var playerOneName = this.state.playerOneName;
-    var playerTwoName = this.state.playerTwoName;
-    var playerOneImage = this.state.playerOneImage;
-    var playerTwoImage = this.state.playerTwoImage;
+    var playerOneName = this.props.playerOneName;
+    var playerTwoName = this.props.playerTwoName;
+    var playerOneImage = this.props.playerOneImage;
+    var playerTwoImage = this.props.playerTwoImage;
 
     return (
       <div>
